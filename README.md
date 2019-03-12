@@ -22,6 +22,7 @@ Including from MarcEdit https://blog.reeset.net/archives/1873
 
 ## 3. Getting to know your data
 How should your data look?
+
 Familiarisation with rows and columns, moving, renaming, etc
 
 ## 4. Simple cleaning without code: facets and filters
@@ -32,10 +33,12 @@ It's amazing
 
 ## 6. Transformations
 Common transforms
+
 Less-common transforms (using GREL, which looks scary but is quite a friendly scripting language)
 
 ## 7. Reconciliation
 with VIAF, because this is a library workshop
+
 Make sure to include the http://refine.codefork.com/ link + instructions
 
 ## 8. Getting data out of OpenRefine
