@@ -15,7 +15,7 @@ By the conclusion of this workshop you will be able to:
 Ensure you have [downloaded OpenRefine](http://openrefine.org/download) before Tech Camp. It will work on Windows, Mac and Linux computers.
 
 ## 1. What is OpenRefine and why do I want it?
-Why am I here, etc
+How will it help me improve my metadata? Also, a brief overview of what OR is and is not good at
 
 ## 2. Getting data into OpenRefine
 Including from MarcEdit https://blog.reeset.net/archives/1873
@@ -27,16 +27,16 @@ How should your data look? Familiarisation with rows and columns, moving, renami
 Including how to do these things with regex, which we learned about before lunch
 
 ## 5. Clustering and editing
-It's amazing 
+AKA the killer feature of OpenRefine. Let the algorithm assist you to normalise your messy data
 
 ## 6. Transformations
-Common transforms
-Less-common transforms (using GREL, which looks scary but is quite a friendly scripting language)
+Common transforms (whitespace, upper/lowercase, to null, etc) and less-common transforms (using GREL, which looks scary but is quite a friendly scripting language. Include plenty of examples and some \[links to\] canned GREL scripts for common tasks)
 
 ## 7. Reconciliation
 with VIAF, because this is a library workshop. Make sure to include the http://refine.codefork.com/ link + instructions
 
 ## 8. Getting data out of OpenRefine
-Recap of getting it to MarcEdit (.tsv, basically)
+Recap of getting it back into MarcEdit (.tsv, basically)
 
 ## 9. Project time!
+TBC
