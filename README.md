@@ -3,6 +3,8 @@ Welcome to the VALA Tech Camp OpenRefine workshop! Here you will learn how to us
 
 Your workshop facilitator is [Alissa McCulloch](https://twitter.com/lissertations).
 
+Click [here](/div1.md) for the NLA version of this workshop.
+
 ## Workshop Objectives
 By the conclusion of this workshop you will be able to:
 
