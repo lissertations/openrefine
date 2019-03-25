@@ -141,7 +141,7 @@ http://refine.codefork.com/reconcile/viaf
 14. Delete Content 2 column as it's no longer needed
 15. Pat yourself on the back
 
-16. (extra) Checking for errant missed full stops: text filter > \.$ [regex] > invert = this shows all fields that do NOT have a full stop at the end. Most of these will be fields with a $d but no $e. Text filter > $d > invert || Text filter > $4 > invert || Transform `value + '.'`
+16. (extra) Checking for errant missed full stops: text filter > \.$ [regex] > invert = this shows all fields that do NOT have a full stop at the end. Most of these will be fields with a $d but no $e. Text filter > $d > invert | Text filter > $4 > invert | Transform `value + '.'`
 
 Remembering to do all those steps is finicky and exhausting. Fortunately OpenRefine provides a way to export your edit history so you can re-apply those same steps to another set of data. **Caution!!** This does NOT include setting facets and filters, because those don't actually edit your data, just change the way it's presented to you. If you choose to re-use your edit history this way, make sure your facets are set first. This is extra important when editing MARC data - otherwise you'll end up with a bunch of mis-edited fields!
 
