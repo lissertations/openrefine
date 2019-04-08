@@ -1,4 +1,4 @@
-# NLA OpenRefine Workshop Outline
+# NLA OpenRefine Workshop Outline for Division 3
 Compiled and presented by Alissa McCulloch, Australian Monographs
 
 ## Background
