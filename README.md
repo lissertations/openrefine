@@ -11,8 +11,9 @@ email: [hello@lissertations.net](mailto:hello@lissertations.net)
 ## Download your dodgy data ⬇️
 You have two choices of project data: a **MARC file (converted into TSV)** and a **regular spreadsheet / CSV file**. Feel free to play around with either or both!
 
-[MARC/TSV FILE](https://github.com/lissertations/openrefine/blob/master/marc_data.tsv) 
-[DOAJ/CSV FILE](https://github.com/lissertations/openrefine/blob/master/doaj_data.csv)
+[MARC/TSV file](https://github.com/lissertations/openrefine/blob/master/marc_data.tsv) 
+
+[DOAJ/CSV file](https://github.com/lissertations/openrefine/blob/master/doaj_data.csv)
 
 To get these files into OpenRefine:
 1. Right-click on these links to save the files to your desktop. 
@@ -45,6 +46,12 @@ Because of the layout of a MARC file within OpenRefine, it's often easiest to lo
 
 Often having two facets can be a great way to spot inconsistencies in your data. For example, put a text facet on the Tags column, then another on the Indicators column. This will show you the indicator combinations for each instance of that particular field. If any shouldn't be there, simply click on the indicator values on the left to pop open a text box, where you can edit them.
 
+#### Bulk edit headings
+Let's suppose some of these headings are a little out of date, and we want to replace them. 
+1. Put a text facet on the Tags column, and select the 650 field.
+2. Put another text facet on the Content column. Don't select anything, but have a look at what's in the Content facet. You can sort by 'name' or by 'count'.
+3. To edit a heading, hover over it within the Content facet. An 'edit' button will appear. Click on it. Make whatever edits you desire, then click Apply. Bam! Your headings have been magically changed! 🔮
+
 #### Fix dodgy UTF-8 encoding
 I'm not sure if there is any in this dataset, but you may find that moving data between various programs and systems can result in special characters going a bit off, and 'é'' becomes 'Ã©', among other things.
 
@@ -53,10 +60,10 @@ To rectify, simply run this transformation on the offending column:
 `value.reinterpret("utf-8")` 
 
 #### Get subfields out of your name headings before clustering
-As mentioned, this killer feature only work with plain text (that is, text without MARC subfields). This workflow is quite convoluted, and you don't have to finish it today! This is part of a real workflow that I used at work.
+As mentioned, the excellent Cluster and edit and Reconciliation features only work with plain text (that is, text without MARC subfields). This workflow is quite convoluted, and you don't have to finish it today! This is part of a real workflow that I used at work.
 
 To strip the MARC subfields from the 100 field:
-1. Put a text facet on the 
+1. Put a text facet on the Tag column, and select 100 from the list on the left
 2. If there are $e subfields in here, you'll need to split them out into their own column, to be reattached later. On the Content column, go to Edit cells > Split multi-valued cells, and use '$e' as the separator. Do not delete column, do not guess cell type. This will create a new 'Content 2' column.
 3. Run the following transformation on the 'Content' column: 
 `value.replace('$a','').replace('$d',' ').replace('$q',' ').replace('$c',' ').split('$e')[0]`
@@ -124,11 +131,11 @@ In the Publisher column you should be able to see the various potential matches.
 We could do these one by one, but if we are confident with matches, there is an option to accept all:
 
 *   Remove all filters/facets from the project so all rows display
-*   In the Publisher column use the dropdown menu to choose ‘Reconcile->Actions->Match each cell to its best candidate’
+*   In the Publisher column use the dropdown menu to choose ‘Reconcile > Actions > Match each cell to its best candidate’
 
 There are two things that reconciliation can do for you. Firstly it gets a standard form of the name or label for the entity. Secondly it gets an ID for the entity - in this case a VIAF id. This is hidden in the default view, but can be extracted:
 
-*   In the Publisher column use the dropdown menu to choose ‘Edit column->Add column based on this column…’
+*   In the Publisher column use the dropdown menu to choose ‘Edit column > Add column based on this column…’
 *   Give the column the name ‘VIAF ID’
 *   In the GREL expression box type `cell.recon.match.id`
 *   This will create a new column that contains the VIAF ID for the matched entity.
