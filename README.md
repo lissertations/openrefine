@@ -8,8 +8,8 @@ Please feel free to ask Alissa or Alexis for help. If you have a question we can
 twitter: [@lissertations](https://twitter.com/lissertations) | 
 email: [hello@lissertations.net](mailto:hello@lissertations.net)
 
-## Download your dodgy data ⬇️
-You have two choices of project data: a **MARC file (converted into TSV)** and a **regular spreadsheet / CSV file**. Feel free to play around with either or both!
+## Download your data ⬇️
+You have two choices of project data: a **MARC file (converted into TSV)** and a **regular spreadsheet / CSV file**. Feel free to play around with either or both! Right-click on these links to save them to your computer.
 
 [MARC/TSV file](https://github.com/lissertations/openrefine/blob/master/marc_data.tsv) 
 
@@ -31,7 +31,7 @@ Some of these exercises are the same ones that were demonstrated today. If we ca
 ## MARC data as TSV (marc_data.tsv)
 *Focused demonstration of how OpenRefine can be used to enhance MARC data*
 
-This dataset comprises around fifty random MARC files that I pulled from the NLA's catalogue. 😄
+This dataset comprises around fifty random MARC files that Alissa pulled from the NLA's catalogue, possibly from her giant to-read pile. 😄
 
 Ordinarily you would need to use a program like [MarcEdit](https://marcedit.reeset.net/downloads) to convert a binary MARC file into a tab-separated values (TSV) file. OpenRefine doesn't deal well with MARC files, so we need to convert it into a format that looks more like a spreadsheet. Terry Reese, the creator fo MarcEdit, has written a [workflow](https://blog.reeset.net/archives/1873) on how you can do this.
 
@@ -42,7 +42,7 @@ Many libraries use both MarcEdit and OpenRefine to clean and improve their data.
 #### Facet by tag
 Because of the layout of a MARC file within OpenRefine, it's often easiest to look at all the instances of a given field at once, eg. all the 650 fields. Open up a text facet (Facet > Text facet) and select the field you want.
 
-**Caution!** Even if you have faceted by tag before working with the Content column, selecting anything in the 'Edit column' menu will indeed edit the entire column, *not just the faceted data*. Ask me how I know this 🙃
+**Caution!** Even if you have faceted by tag before working with the Content column, selecting anything in the 'Edit column' menu will indeed edit the entire column, *not just the faceted data*. We may have learned this the hard way 🙃
 
 Often having two facets can be a great way to spot inconsistencies in your data. For example, put a text facet on the Tags column, then another on the Indicators column. This will show you the indicator combinations for each instance of that particular field. If any shouldn't be there, simply click on the indicator values on the left to pop open a text box, where you can edit them.
 
@@ -60,7 +60,7 @@ To rectify, simply run this transformation on the offending column:
 `value.reinterpret("utf-8")` 
 
 #### Get subfields out of your name headings before clustering
-As mentioned, the excellent Cluster and edit and Reconciliation features only work with plain text (that is, text without MARC subfields). This workflow is quite convoluted, and you don't have to finish it today! This is part of a real workflow that I used at work.
+As mentioned, the excellent Cluster and edit and Reconciliation features only work with plain text (that is, text without MARC subfields). This workflow is quite convoluted, and you don't have to finish it today! This is part of a real workflow that Alissa used at work.
 
 To strip the MARC subfields from the 100 field:
 1. Put a text facet on the Tag column, and select 100 from the list on the left
