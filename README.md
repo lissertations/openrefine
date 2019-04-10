@@ -11,7 +11,7 @@ email: [hello@lissertations.net](mailto:hello@lissertations.net)
 ## Download your data ⬇️
 You have two choices of project data: a **MARC file (converted into TSV)** and a **regular spreadsheet / CSV file**. Feel free to play around with either or both! Right-click on these links to save them to your computer.
 
-[MARC/TSV file](https://github.com/lissertations/openrefine/blob/master/marc_data.tsv) 
+[MARC/TSV file](https://github.com/lissertations/openrefine/raw/gh-pages/data/marc_data.tsv) 
 
 [DOAJ/CSV file](https://github.com/LibraryCarpentry/lc-open-refine/raw/gh-pages/data/doaj-article-sample.csv)
 
