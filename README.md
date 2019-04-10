@@ -11,7 +11,7 @@ email: [hello@lissertations.net](mailto:hello@lissertations.net)
 ## Download your dodgy data ⬇️
 You have two choices of project data: a **MARC file (converted into TSV)** and a **regular spreadsheet / CSV file**. Feel free to play around with either or both!
 
-[MARC/TSV FILE](https://github.com/lissertations/openrefine/blob/master/doaj_data.csv) 
+[MARC/TSV FILE](https://github.com/lissertations/openrefine/blob/master/marc_data.tsv) 
 [DOAJ/CSV FILE](https://github.com/lissertations/openrefine/blob/master/doaj_data.csv)
 
 To get these files into OpenRefine:
@@ -30,9 +30,7 @@ Some of these exercises are the same ones that were demonstrated today. If we ca
 ## MARC data as TSV (marc_data.tsv)
 *Focused demonstration of how OpenRefine can be used to enhance MARC data*
 
-This dataset comprises 10 random MARC files that I pulled from the NLA's catalogue and then mucked up a bit. 😄
-
-<!-- 1000 random MARC files from Harvard University’s catalogue, as compiled by Terry Reese, the creator of MarcEdit. (Originally on Terry's [Github repo](https://github.com/reeset/data_packs/tree/master/marc)). They're a bit clean and tidy, if I'm honest, but it's a real dataset. -->
+This dataset comprises around fifty random MARC files that I pulled from the NLA's catalogue. 😄
 
 Ordinarily you would need to use a program like [MarcEdit](https://marcedit.reeset.net/downloads) to convert a binary MARC file into a tab-separated values (TSV) file. OpenRefine doesn't deal well with MARC files, so we need to convert it into a format that looks more like a spreadsheet. Terry Reese, the creator fo MarcEdit, has written a [workflow](https://blog.reeset.net/archives/1873) on how you can do this.
 
@@ -58,32 +56,25 @@ To rectify, simply run this transformation on the offending column:
 As mentioned, this killer feature only work with plain text (that is, text without MARC subfields). This workflow is quite convoluted, and you don't have to finish it today! This is part of a real workflow that I used at work.
 
 To strip the MARC subfields from the 100 field:
-1. Facet by 100 field
-2. If there are $e subfields in here, you'll need to split them out into their own column, to be reattached later. On the Content column, go to Edit cells > Split multi-valued cells, and use '$e' as the separator. Do not delete column, do not guess cell type
-3. Use the following transformation: 
+1. Put a text facet on the 
+2. If there are $e subfields in here, you'll need to split them out into their own column, to be reattached later. On the Content column, go to Edit cells > Split multi-valued cells, and use '$e' as the separator. Do not delete column, do not guess cell type. This will create a new 'Content 2' column.
+3. Run the following transformation on the 'Content' column: 
 `value.replace('$a','').replace('$d',' ').replace('$q',' ').replace('$c',' ').split('$e')[0]`
 4. Go to Edit cells > Cluster and edit, and cluster away!
 5. Adding the subfields back in is slightly convoluted, and there are a couple of things to watch out for:
    * Go to Edit cells > Transform, and paste in the following GREL script `'$a' + value` (this adds the $a to the front of the cell)
    * Repeat, but with this GREL script `value.replace(' (', '$q(').replace(' 1', '$d1')` (this replaces the $d and $q fields. But not everything needs to be a $q!)
-10. Text filter > $q > I can see the only two $q fields that ought to be $c fields are '(Zine creator'), so in this particular example I can either edit those two manually, or run a script. Let's run a script > `value.replace('$q(Zine','$c(Zine')`
-11. Manually merge the only one with multiple $e fields because in this case it's easier than the alternative (facet by blank twice). Like anything it's a judgment call as to whether manual editing or scripting is easier
-12. Content 2 column > Facet > Customized facets > Facet by blank (True or false - false! it is not blank! there is a value in it)
-13. Text transform on Content column to concatenate the two columns `value + "$e" + cells['Content 2'].value`
-14. Delete Content 2 column as it's no longer needed
-15. Pat yourself on the back
-
-16. (extra) Checking for errant missed full stops: text filter > \.$ [regex] > invert = this shows all fields that do NOT have a full stop at the end. Most of these will be fields with a $d but no $e. 
-* Text filter > $d > invert
-* Text filter > $4 > invert
-* Transform `value + '.'`
+10. Let's look at the $q fields. Run a Text filter and put '$q' in the box. You can see the only two $q fields that ought to be $c fields are '(Zine creator'), so here you can either edit those two manually, or run a script. Let's run a script > `value.replace('$q(Zine','$c(Zine')`
+11. One of the fields has two $e subfields. Here it's easier to just manually edit the field. It's often a judgment call in OpenRefine as to whether it's more efficient to write a GREL script, or just edit a couple of things manually. 🙂
+12. In the Content 2 column, go to Facet > Customized facets > Facet by blank. This will return a Boolean, or 'true or false' value. (Either 'false! it is not blank!' or 'true! there is a value in it')
+13. Now run a transform on the Content column to concatenate the two Content columns, or bring them together into one column: `value + "$e" + cells['Content 2'].value`
+14. Delete Content 2 column as it's no longer needed: Edit column > Remove this column
+15. Pat yourself on the back! That was really finicky but you did it, well done 🎉
 
 ## DOAJ data as DSV (doaj_data.csv)
 *Broader demonstration of the features and capabilities of OpenRefine for typical spreadsheets*
 
 This dataset (and most of the exercises) are pinched from Library Carpentry. It's a slightly messy bibliographic dataset pulled from the *Directory of Open Access Journals (DOAJ)*. OpenRefine is happiest with data in this kind of spreadsheet format, so you can do lots of cool things with this.
-
-*   Split / join multi-valued cells
 
 ### Things to try
 
@@ -96,11 +87,10 @@ This dataset (and most of the exercises) are pinched from Library Carpentry. It'
 6. In the ‘Expression’ box type the GREL expression `value.toString("dd MMMM yyyy")`
 
 #### Reconciling publisher names with VIAF IDs
-In this exercise you are going to use the VIAF Reconciliation service written by [Jeff Chiu](https://twitter.com/absolutelyjeff), via a public service he runs at [http://refine.codefork.com/](http://refine.codefork.com/).
+Here we'll use the VIAF Reconciliation service written by [Jeff Chiu](https://twitter.com/absolutelyjeff), via a public service he runs at [http://refine.codefork.com/](http://refine.codefork.com/).
 
 *   In the Publisher column use the dropdown menu to choose ‘Reconcile > Start Reconciling’
-*   If this is the first time you’ve used this particular reconciliation service, you’ll need to add the details of the service now
-    *   Click ‘Add Standard Service…’ and in the dialogue that appears enter “http://refine.codefork.com/reconcile/viaf”
+    *   We'll need to add the VIAF service in manually, as it doesn't come included. Click ‘Add Standard Service…’ and in the dialogue that appears enter “http://refine.codefork.com/reconcile/viaf”
 *   You should now see a heading in the list on the left hand side of the Reconciliation dialogue called “VIAF Reconciliation Service”
 *   Click on this to choose to use this reconciliation service
 *   In the middle box in the reconciliation dialogue you may get asked what type of ‘entity’ you want to reconcile to - that is, what type of thing are you looking for. The list will vary depending on what reconciliation service you are using.
