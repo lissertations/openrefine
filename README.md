@@ -13,7 +13,7 @@ You have two choices of project data: a **MARC file (converted into TSV)** and a
 
 [MARC/TSV file](https://github.com/lissertations/openrefine/blob/master/marc_data.tsv) 
 
-[DOAJ/CSV file](https://github.com/lissertations/openrefine/blob/master/doaj_data.csv)
+[DOAJ/CSV file](https://github.com/LibraryCarpentry/lc-open-refine/raw/gh-pages/data/doaj-article-sample.csv)
 
 To get these files into OpenRefine:
 1. Right-click on these links to save the files to your desktop. 
