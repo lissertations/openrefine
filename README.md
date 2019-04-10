@@ -52,6 +52,12 @@ Let's suppose some of these headings are a little out of date, and we want to re
 2. Put another text facet on the Content column. Don't select anything, but have a look at what's in the Content facet. You can sort by 'name' or by 'count'.
 3. To edit a heading, hover over it within the Content facet. An 'edit' button will appear. Click on it. Make whatever edits you desire, then click Apply. Bam! Your headings have been magically changed! 🔮
 
+#### Insert a subfield
+You'll see a lot of these records are AACR2-era records, and are missing some of the more modern fields. Here we'll try inserting a $q into 020 fields that don't have one, where the ISBN and the qualifying information are both in the $a field.
+1. Put a text facet on the Tags column, and select the 020 field.
+2. In the Tags column, go to Edit cells > Transform and run the following script: `value.replace(' (','$q(')`
+3. Admire your new subfields! Yay! 😀
+
 #### Fix dodgy UTF-8 encoding
 I'm not sure if there is any in this dataset, but you may find that moving data between various programs and systems can result in special characters going a bit off, and 'é'' becomes 'Ã©', among other things.
 
@@ -140,7 +146,7 @@ There are two things that reconciliation can do for you. Firstly it gets a stand
 *   In the GREL expression box type `cell.recon.match.id`
 *   This will create a new column that contains the VIAF ID for the matched entity.
 
-## Further reading
+## Further reading 📚
 * [Library Carpentry OpenRefine lesson](https://librarycarpentry.org/lc-open-refine/), on which this workshop is based
 * OpenRefine recipes from [Library Workflow Exchange](http://www.libraryworkflowexchange.org/tag/openrefine/)
 * [OpenRefine LibGuide](https://guides.library.illinois.edu/openrefine/home) from the University of Illinois. A little dated (uses version 2.8) but lots of good advice
